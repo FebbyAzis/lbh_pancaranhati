@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('landing_page');
 });
 
+Route::get('/landing-page', function () {
+    return view('landing_page');
+});
+
+
 Auth::routes();
 
 

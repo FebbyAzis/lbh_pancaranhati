@@ -1,7 +1,9 @@
-<div class="main-content container-fluid">
+@extends('layout.app')
+@section('content')
+    <div class="main-content container-fluid">
     <div class="page-title">
         <h3>Dashboard</h3>
-        <p class="text-subtitle text-muted">ADMIN</p>
+        <p class="text-subtitle text-muted">USERS</p>
     </div>
     <section class="section">
         <div class="row mb-2">
@@ -270,3 +272,4 @@
         </div>
     </section>
 </div>
+@endsection

@@ -27,7 +27,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         
-                        <input type="hidden" name="role" value="users">
+                        <input type="hidden" name="role" value="admin">
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group">

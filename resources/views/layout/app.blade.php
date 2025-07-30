@@ -20,6 +20,7 @@ $user = Auth::user();
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     
     <link rel="stylesheet" href="{{ asset('vendors/chartjs/Chart.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -36,312 +37,160 @@ $user = Auth::user();
         <ul class="menu">
             
             
-                <li class='sidebar-title'>Main Menu</li>
+                <li class='sidebar-title'>Home</li>
             
-            
-            
-                <li class="sidebar-item active ">
-                    <a href="index.html" class='sidebar-link'>
+            @if ($user->role == 'users')
+                                <li class="sidebar-item {{ request()->is('dashboard*') ? 'active' : '' }}">
+                    <a href="{{url('/dashboard')}}" class='sidebar-link'>
                         <i data-feather="home" width="20"></i> 
                         <span>Dashboard</span>
                     </a>
                     
                 </li>
 
-            
-            
-            
-                <li class="sidebar-item  has-sub">
+                <li class='sidebar-title'>Main Menu</li>
+                
+                <li class="sidebar-item  has-sub {{ request()->is('ajukan-konsultasi*') ? 'active' : '' }} {{ request()->is('riwayat-konsultasi*') ? 'active' : '' }} {{ request()->is('bookmark-konsultasi*') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="triangle" width="20"></i> 
-                        <span>Components</span>
+                        <span>Konsultasi Hukum</span>
                     </a>
                     
                     <ul class="submenu ">
                         
                         <li>
-                            <a href="component-alert.html">Alert</a>
+                            <a href="{{url('/ajukan-konsultasi')}}">Ajukan Konsultasi</a>
                         </li>
                         
                         <li>
-                            <a href="component-badge.html">Badge</a>
+                            <a href="{{url('/riwayat-konsultasi')}}">Riwayat Konsultasi</a>
                         </li>
                         
                         <li>
-                            <a href="component-breadcrumb.html">Breadcrumb</a>
+                            <a href="{{url('/bookmark-konsultasi')}}">Bookmark Konsultasi</a>
                         </li>
-                        
-                        <li>
-                            <a href="component-buttons.html">Buttons</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-card.html">Card</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-carousel.html">Carousel</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-dropdowns.html">Dropdowns</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-list-group.html">List Group</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-modal.html">Modal</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-navs.html">Navs</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-pagination.html">Pagination</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-progress.html">Progress</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-spinners.html">Spinners</a>
-                        </li>
-                        
-                        <li>
-                            <a href="component-tooltips.html">Tooltips</a>
-                        </li>
-                        
                     </ul>
                     
                 </li>
 
-            
-            
-            
-                <li class="sidebar-item  has-sub">
+                                <li class="sidebar-item  has-sub {{ request()->is('ajukan-pendampingan*') ? 'active' : '' }} {{ request()->is('riwayat-pendampingan*') ? 'active' : '' }} {{ request()->is('jadwal pendampingan*') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
-                        <i data-feather="briefcase" width="20"></i> 
-                        <span>Extra Components</span>
+                        <i data-feather="triangle" width="20"></i> 
+                        <span>Layanan Hukum</span>
                     </a>
                     
                     <ul class="submenu ">
                         
                         <li>
-                            <a href="component-extra-avatar.html">Avatar</a>
+                            <a href="{{url('/ajukan-pendampingan')}}">Ajukan Pendampingan</a>
                         </li>
                         
                         <li>
-                            <a href="component-extra-divider.html">Divider</a>
+                            <a href="riwayat-layanan">Riwayat Layanan</a>
                         </li>
                         
+                        <li>
+                            <a href="{{url('/jadwal-pendampingan')}}">Jadwal Pendampingan</a>
+                        </li>
                     </ul>
                     
                 </li>
-
             
-            
-            
-                <li class='sidebar-title'>Forms &amp; Tables</li>
-            
-            
-            
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i data-feather="file-text" width="20"></i> 
-                        <span>Form Elements</span>
-                    </a>
-                    
-                    <ul class="submenu ">
-                        
-                        <li>
-                            <a href="form-element-input.html">Input</a>
-                        </li>
-                        
-                        <li>
-                            <a href="form-element-input-group.html">Input Group</a>
-                        </li>
-                        
-                        <li>
-                            <a href="form-element-select.html">Select</a>
-                        </li>
-                        
-                        <li>
-                            <a href="form-element-radio.html">Radio</a>
-                        </li>
-                        
-                        <li>
-                            <a href="form-element-checkbox.html">Checkbox</a>
-                        </li>
-                        
-                        <li>
-                            <a href="form-element-textarea.html">Textarea</a>
-                        </li>
-                        
-                    </ul>
-                    
-                </li>
-
-            
-            
-            
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                <li class="sidebar-item  {{ request()->is('dokumen-hukum*') ? 'active' : '' }}">
+                    <a href="{{url('/dokumen-hukum')}}" class='sidebar-link'>
                         <i data-feather="layout" width="20"></i> 
-                        <span>Form Layout</span>
+                        <span>Dokumen Hukum</span>
                     </a>
                     
                 </li>
 
+                <li class="sidebar-item  {{ request()->is('kalender-jadwal*') ? 'active' : '' }}">
+                    <a href="{{url('/kalender-jadwal')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Kalender Jadwal</span>
+                    </a>
+                    
+                </li>
             
+            @else
+                                          <li class="sidebar-item {{ request()->is('dashboard-admin*') ? 'active' : '' }}">
+                    <a href="{{url('/dashboard-admin')}}" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i> 
+                        <span>Dashboard</span>
+                    </a>
+                    
+                </li>
             
-            
-                <li class="sidebar-item  ">
-                    <a href="form-editor.html" class='sidebar-link'>
-                        <i data-feather="layers" width="20"></i> 
-                        <span>Form Editor</span>
+                <li class="sidebar-item  {{ request()->is('konsultasi-masuk*') ? 'active' : '' }}">
+                    <a href="{{url('/konsultasi-masuk')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Konsultasi Masuk</span>
                     </a>
                     
                 </li>
 
-            
-            
-            
-                <li class="sidebar-item  ">
-                    <a href="table.html" class='sidebar-link'>
-                        <i data-feather="grid" width="20"></i> 
-                        <span>Table</span>
+                <li class="sidebar-item  {{ request()->is('jawaban-otomatis*') ? 'active' : '' }}">
+                    <a href="{{url('/jawaban-otomatis')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Jawaban Otomatis</span>
                     </a>
                     
                 </li>
 
-            
-            
-            
-                <li class="sidebar-item  ">
-                    <a href="table-datatable.html" class='sidebar-link'>
-                        <i data-feather="file-plus" width="20"></i> 
-                        <span>Datatable</span>
+                <li class="sidebar-item  {{ request()->is('pengajuan-layanan-hukum*') ? 'active' : '' }}">
+                    <a href="{{url('/pengajuan-layanan-hukum')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Pengajuan Layanan Hukum</span>
                     </a>
                     
                 </li>
 
-            
-            
-            
-                <li class='sidebar-title'>Extra UI</li>
-            
-            
-            
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i data-feather="user" width="20"></i> 
-                        <span>Widgets</span>
+                <li class="sidebar-item  {{ request()->is('jadwal-dan-kalender-pendampingan*') ? 'active' : '' }}">
+                    <a href="{{url('/jadwal-dan-kalender-pendampingan')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Jadwal & Kalender Pendampingan</span>
                     </a>
-                    
-                    <ul class="submenu ">
-                        
-                        <li>
-                            <a href="ui-chatbox.html">Chatbox</a>
-                        </li>
-                        
-                        <li>
-                            <a href="ui-pricing.html">Pricing</a>
-                        </li>
-                        
-                        <li>
-                            <a href="ui-todolist.html">To-do List</a>
-                        </li>
-                        
-                    </ul>
                     
                 </li>
 
-            
-            
-            
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i data-feather="trending-up" width="20"></i> 
-                        <span>Charts</span>
+                <li class="sidebar-item  {{ request()->is('dokumen-dan-surat-kuasa*') ? 'active' : '' }}">
+                    <a href="{{url('/dokumen-dan-surat-kuasa')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Dokumen & Surat Kuasa</span>
                     </a>
-                    
-                    <ul class="submenu ">
-                        
-                        <li>
-                            <a href="ui-chart-chartjs.html">ChartJS</a>
-                        </li>
-                        
-                        <li>
-                            <a href="ui-chart-apexchart.html">Apexchart</a>
-                        </li>
-                        
-                    </ul>
                     
                 </li>
 
-            
-            
-            
-                <li class='sidebar-title'>Pages</li>
-            
-            
-            
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i data-feather="user" width="20"></i> 
-                        <span>Authentication</span>
+                <li class="sidebar-item  {{ request()->is('manajemen-user*') ? 'active' : '' }}">
+                    <a href="{{url('/manajemen-user')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Manajemen User</span>
                     </a>
-                    
-                    <ul class="submenu ">
-                        
-                        <li>
-                            <a href="auth-login.html">Login</a>
-                        </li>
-                        
-                        <li>
-                            <a href="auth-register.html">Register</a>
-                        </li>
-                        
-                        <li>
-                            <a href="auth-forgot-password.html">Forgot Password</a>
-                        </li>
-                        
-                    </ul>
                     
                 </li>
 
-            
-            
-            
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i data-feather="alert-circle" width="20"></i> 
-                        <span>Errors</span>
+                <li class="sidebar-item  {{ request()->is('statistik-dan-laporan*') ? 'active' : '' }}">
+                    <a href="{{url('/statistik-dan-laporan')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Statistik & Laporan</span>
                     </a>
-                    
-                    <ul class="submenu ">
-                        
-                        <li>
-                            <a href="error-403.html">403</a>
-                        </li>
-                        
-                        <li>
-                            <a href="error-404.html">404</a>
-                        </li>
-                        
-                        <li>
-                            <a href="error-500.html">500</a>
-                        </li>
-                        
-                    </ul>
                     
                 </li>
 
+                <li class="sidebar-item  {{ request()->is('pengaturan akun*') ? 'active' : '' }}">
+                    <a href="{{url('/pengaturan-akun')}}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i> 
+                        <span>Pengaturan Akun</span>
+                    </a>
+                    
+                </li>
             
+                <br>
+                <br>
+                <br>
+            @endif
+            
+
             
          
         </ul>
@@ -407,13 +256,32 @@ $user = Auth::user();
                                 <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
                                 <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"><i data-feather="log-out"></i> Logout</button>
                             </div>
                         </li>
                     </ul>
                 </div>
             </nav>
-            
+    <form  action="{{ route('logout') }}" method="POST">
+    @csrf
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Keluar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Apakah kamu yakin ingin keluar?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+            <button type="submit" class="btn btn-primary">Ya</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
             @yield('content')
 
             <footer>
@@ -428,6 +296,7 @@ $user = Auth::user();
             </footer>
         </div>
     </div>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <script src="{{ asset('js/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
