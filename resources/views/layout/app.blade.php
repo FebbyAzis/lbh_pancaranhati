@@ -17,13 +17,15 @@ $user = Auth::user();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Voler Admin Dashboard</title>
     
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+   <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     
-    <link rel="stylesheet" href="{{ asset('vendors/chartjs/Chart.min.css') }}">
+    <link rel="stylesheet" href="{{asset('vendors/chartjs/Chart.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/simple-datatables/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{asset('vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="shortcut icon" href="{{ asset('images/favicon.svg') }}" type="image/x-icon">
 </head>
 <body>
@@ -50,7 +52,7 @@ $user = Auth::user();
 
                 <li class='sidebar-title'>Main Menu</li>
                 
-                <li class="sidebar-item  has-sub {{ request()->is('ajukan-konsultasi*') ? 'active' : '' }} {{ request()->is('riwayat-konsultasi*') ? 'active' : '' }} {{ request()->is('bookmark-konsultasi*') ? 'active' : '' }}">
+                <li class="sidebar-item  has-sub {{ request()->is('ajukan-konsultasi*') ? 'active' : '' }} {{ request()->is('riwayat-layanan-konsultasi*') ? 'active' : '' }} {{ request()->is('detail-riwayat-layanan-konsultasi*') ? 'active' : '' }} {{ request()->is('bookmark-konsultasi*') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="triangle" width="20"></i> 
                         <span>Konsultasi Hukum</span>
@@ -63,7 +65,7 @@ $user = Auth::user();
                         </li>
                         
                         <li>
-                            <a href="{{url('/riwayat-konsultasi')}}">Riwayat Konsultasi</a>
+                            <a href="{{url('/riwayat-layanan')}}">Riwayat Layanan</a>
                         </li>
                         
                         <li>
@@ -73,20 +75,20 @@ $user = Auth::user();
                     
                 </li>
 
-                                <li class="sidebar-item  has-sub {{ request()->is('ajukan-pendampingan*') ? 'active' : '' }} {{ request()->is('riwayat-pendampingan*') ? 'active' : '' }} {{ request()->is('jadwal pendampingan*') ? 'active' : '' }}">
+                                <li class="sidebar-item  has-sub {{ request()->is('ajukan-pendampingan*') ? 'active' : '' }} {{ request()->is('riwayat-layanan-pendampingan*') ? 'active' : '' }} {{ request()->is('detail-riwayat-layanan-pendampingan*') ? 'active' : '' }} {{ request()->is('jadwal-pendampingan*') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="triangle" width="20"></i> 
                         <span>Layanan Hukum</span>
                     </a>
                     
-                    <ul class="submenu ">
+                    <ul class="submenu">
                         
                         <li>
                             <a href="{{url('/ajukan-pendampingan')}}">Ajukan Pendampingan</a>
                         </li>
                         
                         <li>
-                            <a href="riwayat-layanan">Riwayat Layanan</a>
+                            <a href="{{url('/riwayat-layanan-pendampingan')}}">Riwayat Layanan</a>
                         </li>
                         
                         <li>
@@ -137,7 +139,7 @@ $user = Auth::user();
                     
                 </li>
 
-                <li class="sidebar-item  {{ request()->is('pengajuan-layanan-hukum*') ? 'active' : '' }}">
+                <li class="sidebar-item  {{ request()->is('pengajuan-layanan-hukum*') ? 'active' : '' }} {{ request()->is('detail-pengajuan-layanan-hukum*') ? 'active' : '' }}">
                     <a href="{{url('/pengajuan-layanan-hukum')}}" class='sidebar-link'>
                         <i data-feather="layout" width="20"></i> 
                         <span>Pengajuan Layanan Hukum</span>
@@ -145,8 +147,8 @@ $user = Auth::user();
                     
                 </li>
 
-                <li class="sidebar-item  {{ request()->is('jadwal-dan-kalender-pendampingan*') ? 'active' : '' }}">
-                    <a href="{{url('/jadwal-dan-kalender-pendampingan')}}" class='sidebar-link'>
+                <li class="sidebar-item  {{ request()->is('kelola-jadwal-pendampingan*') ? 'active' : '' }}">
+                    <a href="{{url('/kelola-jadwal-pendampingan')}}" class='sidebar-link'>
                         <i data-feather="layout" width="20"></i> 
                         <span>Jadwal & Kalender Pendampingan</span>
                     </a>
@@ -249,7 +251,7 @@ $user = Auth::user();
                                 <div class="avatar mr-1">
                                     <img src="{{ asset('images/avatar/avatar-s-1.png') }}" alt="" srcset="">
                                 </div>
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                                <div class="d-none d-md-block d-lg-inline-block">Hi, {{AUTH::user()->first_name}} {{AUTH::user()->last_name}}</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
@@ -297,14 +299,16 @@ $user = Auth::user();
         </div>
     </div>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    
-    <script src="{{ asset('vendors/chartjs/Chart.min.js') }}"></script>
-    <script src="{{ asset('vendors/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('js/pages/dashboard.js') }}"></script>
 
-    <script src="{{ asset('js/main.js') }}"></script>
+      <script src="{{asset('js/feather-icons/feather.min.js')}}"></script>
+    <script src="{{asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+    
+    <script src="{{asset('vendors/chartjs/Chart.min.js')}}"></script>
+    <script src="{{asset('vendors/apexcharts/apexcharts.min.js')}}"></script>
+    <script src="{{asset('js/pages/dashboard.js')}}"></script>
+    <script src="{{asset('vendors/simple-datatables/simple-datatables.js')}}"></script>
+    <script src="{{asset('js/vendors.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>

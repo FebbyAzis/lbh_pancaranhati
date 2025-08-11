@@ -17,7 +17,7 @@ class Users
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'pelanggan') {
+        if (Auth::check() && Auth::user()->role == 'users') {
             return $next($request);
         }
         
