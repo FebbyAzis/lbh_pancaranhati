@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-                    <div class="card">
+                    {{-- <div class="card">
             <div class="card-header">
                 Simple Datatable
             </div>
@@ -75,7 +75,7 @@
                     </table>
              
             </div>
-        </div>
+        </div> --}}
 
         </section>
     </div>
@@ -120,16 +120,15 @@
                                 <label for="exampleFormControlTextarea1" class="form-label">Detail Kasus</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" name="detail_kasus" rows="3" required></textarea>
                             </div>
-                           
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1" class="form-label">Lokasi Pendampingan</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="lokasi_pendampingan" rows="3" required></textarea>
+                            </div>
                             <div class="form-group">
                                 <label for="basicInput">Tanggal Permintaan</label>
                                 <input type="date" class="form-control" id="basicInput" name="tanggal_permintaan"
                                     placeholder="..." required>
                             </div>
-                            
-                            
-                        </div>
-                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="basicInput">Urgensi/TIngkat Prioritas</label>
                                 <fieldset class="form-group">
@@ -141,28 +140,106 @@
                                     </select>
                                 </fieldset>
                             </div>
-                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1" class="form-label">Lokasi Pendampingan</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" name="lokasi_pendampingan" rows="3" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="basicInput">Dokumen Pendukung</label>
-                                <input type="file"
-                                    class="form-control @error('dokumen_pendukung') is-invalid @enderror"
-                                    id="basicInput" name="dokumen_pendukung" placeholder="...">
-
-                                @error('dokumen_pendukung')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
                             <div class="form-group">
                                 <label for="basicInput">Kontak Aktif</label>
                                 <input type="text" class="form-control" id="basicInput" name="kontak_aktif"
                                     placeholder="..." required>
                             </div>
+                        </div>
+                        <div class="col-sm-6">
                             
+                             
+                            <div class="form-group">
+                                <label for="basicInput">Surat Panggilan Sidang</label>
+                                <input type="file"
+                                    class="form-control @error('surat_panggilan_sidang') is-invalid @enderror"
+                                    id="basicInput" name="surat_panggilan_sidang" placeholder="..." required>
+
+                                @error('surat_panggilan_sidang')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="basicInput">Bukti Transaksi</label>
+                                <input type="file"
+                                    class="form-control @error('bukti_transaksi') is-invalid @enderror"
+                                    id="basicInput" name="bukti_transaksi" placeholder="..." required>
+
+                                @error('bukti_transaksi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="basicInput">Scan Akta</label>
+                                <input type="file"
+                                    class="form-control @error('akta') is-invalid @enderror"
+                                    id="basicInput" name="akta" placeholder="..." required>
+
+                                @error('akta')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="basicInput">Dokumen Perjanjian</label>
+                                <input type="file"
+                                    class="form-control @error('perjanjian') is-invalid @enderror"
+                                    id="basicInput" name="perjanjian" placeholder="..." required>
+
+                                @error('perjanjian')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="basicInput">Scan KTP</label>
+                                <input type="file"
+                                    class="form-control @error('ktp') is-invalid @enderror"
+                                    id="basicInput" name="ktp" placeholder="..." required>
+
+                                @error('ktp')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="basicInput">Surat Kuasa (Opsional)</label>
+                                <input type="file"
+                                    class="form-control @error('surat_kuasa') is-invalid @enderror"
+                                    id="basicInput" name="surat_kuasa" placeholder="...">
+
+                                @error('surat_kuasa')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="basicInput">Bukti Lainnya (Opsional)</label>
+                                <input type="file"
+                                    class="form-control @error('bukti_lainnya') is-invalid @enderror"
+                                    id="basicInput" name="bukti_lainnya" placeholder="...">
+
+                                @error('bukti_lainnya')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
                         </div>
                         <div class="col-sm-12 mt-2">
                             <div class="form-check">

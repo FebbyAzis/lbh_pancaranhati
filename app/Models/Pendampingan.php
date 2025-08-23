@@ -22,18 +22,40 @@ class Pendampingan extends Model
         'lokasi_pendampingan',
         'tanggal_permintaan',
         'urgensi',
-        'dokumen_pendukung',
+        'surat_panggilan_sidang',
+        'bukti_transaksi',
+        'akta',
+        'perjanjian',
+        'ktp',
+        'bukti_lainnya',
         'kontak_aktif',
         // 'persetujuan',
         'status',
-        'tanggal_pelaksanaan',
-        'petugas', // jika Anda tambahkan kolom ini
+        'catatan',
+        'dokumen_admin',
+        'notifikasi', // jika Anda tambahkan kolom ini
         
     ];
 
    public function jadwal()
 {
     return $this->hasOne(Jadwal::class, 'pendampingan_id');
+}
+
+protected static function booted()
+{
+    static::created(function ($pendampingan) {
+        // kirim notifikasi saat data baru ditambahkan
+        foreach (\App\Models\Users::all() as $user) {
+            $user->notify(new \App\Notifications\DataChangedNotification('Pendampingan', 'ditambahkan'));
+        }
+    });
+
+    static::updated(function ($pendampingan) {
+        foreach (\App\Models\Users::all() as $user) {
+            $user->notify(new \App\Notifications\DataChangedNotification('Pendampingan', 'diubah'));
+        }
+    });
 }
 
 }

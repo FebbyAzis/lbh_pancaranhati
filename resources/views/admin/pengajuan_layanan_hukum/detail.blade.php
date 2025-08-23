@@ -49,7 +49,12 @@
                                     data-target="#default2">
                                     Tolak Pengajuan
                                 </button>
-                            @else
+                            @elseif($p->status == 2)
+                            <button type="button" class="btn btn-sm btn-outline-success block" data-toggle="modal"
+                                    data-target="#default3">
+                                    Atur Jadwal
+                                </button>
+                                @else
                             @endif
                         </div>
                     </div>
@@ -127,57 +132,295 @@
                             <p>{{ $p->kontak_aktif }}</p>
                         </div>
                         <div class="col-sm-3">
-                            <strong>Dokumen Pendukung</strong>
+                            <strong>Catatan dari Petugas</strong>
                         </div>
                         <div class="col-sm-1 text-right">
                             <p>:</p>
                         </div>
                         <div class="col-sm-8">
-                            <img src="{{ url('/photos/' . $p->dokumen_pendukung) }}" width="30%"><br>
-                            <a href="{{ url('photos/' . $p->dokumen_pendukung) }}" target="_blank"
-                                class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+
+                            <p>{{ $p->catatan }}</p>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <strong>Dokumen dari Petugas</strong>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <p>:</p>
+                        </div>
+                        @php
+                        $dokumen_admin = $p->dokumen_admin;
+                        $ext = strtolower(pathinfo($dokumen_admin, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
+                        <div class="col-sm-8">
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $dokumen_admin) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $dokumen_admin) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->dokumen_admin) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $dokumen_admin) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->dokumen_admin == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
 
                         </div>
+
+                       
+
+                </div>
+            </div>
+
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Dokumen Anda
+                </div>
+                <div class="card-body mt-3">
+                    <div class="row">
                         <div class="col-sm-3">
-                            <strong>Jadwal Pendampingan</strong>
+                            <strong>Surat Panggilan Sidang</strong>
                         </div>
                         <div class="col-sm-1 text-right">
                             <p>:</p>
                         </div>
+                        @php
+                        $surat_panggilan_sidang = $p->surat_panggilan_sidang;
+                        $ext = strtolower(pathinfo($surat_panggilan_sidang, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
                         <div class="col-sm-8">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <p>Tanggal</p>
-                                </div>
-                                <div class="col-sm-10">
-                                    <p>{{ date('d/M/Y', strtotime($p->jadwal->tanggal_mulai)) }} -
-                                        {{ date('d/M/Y', strtotime($p->jadwal->tanggal_selesai)) }}</p>
-                                </div>
-                                <div class="col-sm-2">
-                                    Lokasi
-                                </div>
-                                <div class="col-sm-10">
-                                    <p>{{ $p->jadwal->lokasi }}</p>
-                                </div>
-                                <div class="col-sm-2">
-                                    Petugas
-                                </div>
-                                <div class="col-sm-10">
-                                    <p>{{ $p->jadwal->petugas->first_name }} {{ $p->jadwal->petugas->last_name }}</p>
-                                </div>
-                            </div>
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $surat_panggilan_sidang) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $surat_panggilan_sidang) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->surat_panggilan_sidang) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $surat_panggilan_sidang) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->surat_panggilan_sidang == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
                         </div>
+
                         <div class="col-sm-3">
-                            <strong>Catatan</strong>
+                            <strong>Bukti Transaksi</strong>
                         </div>
                         <div class="col-sm-1 text-right">
                             <p>:</p>
                         </div>
+                        @php
+                        $bukti_transaksi = $p->bukti_transaksi;
+                        $ext = strtolower(pathinfo($bukti_transaksi, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
                         <div class="col-sm-8">
-                            <p>{{ $p->jadwal->catatan }}</p>
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $bukti_transaksi) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $bukti_transaksi) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->bukti_transaksi) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $bukti_transaksi) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->bukti_transaksi == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
                         </div>
+
+                        <div class="col-sm-3">
+                            <strong>Scan Akta</strong>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <p>:</p>
+                        </div>
+                        @php
+                        $akta = $p->akta;
+                        $ext = strtolower(pathinfo($akta, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
+                        <div class="col-sm-8">
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $akta) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $akta) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->akta) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $akta) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->akta == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
+                        </div>
+
+                        <div class="col-sm-3">
+                            <strong>Dokumen Perjanjian</strong>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <p>:</p>
+                        </div>
+                        @php
+                        $perjanjian = $p->perjanjian;
+                        $ext = strtolower(pathinfo($perjanjian, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
+                        <div class="col-sm-8">
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $perjanjian) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $perjanjian) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->perjanjian) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $perjanjian) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->perjanjian == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
+                        </div>
+
+                        <div class="col-sm-3">
+                            <strong>Scan KTP</strong>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <p>:</p>
+                        </div>
+                        @php
+                        $ktp = $p->ktp;
+                        $ext = strtolower(pathinfo($ktp, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
+                        <div class="col-sm-8">
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $ktp) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $ktp) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->ktp) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $ktp) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->ktp == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
+                        </div>
+
+                        <div class="col-sm-3">
+                            <strong>Surat Kuasa</strong>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <p>:</p>
+                        </div>
+                        @php
+                        $surat_kuasa = $p->surat_kuasa;
+                        $ext = strtolower(pathinfo($surat_kuasa, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
+                        <div class="col-sm-8">
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $surat_kuasa) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $surat_kuasa) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->surat_kuasa) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $surat_kuasa) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->surat_kuasa == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
+                        </div>
+
+                        <div class="col-sm-3">
+                            <strong>Bukti Lainnya</strong>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <p>:</p>
+                        </div>
+                        @php
+                        $bukti_lainnya = $p->bukti_lainnya;
+                        $ext = strtolower(pathinfo($bukti_lainnya, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    @endphp
+                
+                        <div class="col-sm-8">
+                            
+                    @if (in_array($ext, $imageExtensions))
+                    <!-- Jika file gambar -->
+                    <img src="{{ url('/photos/' . $bukti_lainnya) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $bukti_lainnya) }}" target="_blank"
+                        class="btn btn-sm btn-primary mt-3 mb-3">Lihat Gambar</a>
+                @elseif (in_array($ext, ['pdf', 'doc', 'docx']))
+                    <!-- Jika file dokumen -->
+                    <img src="{{ url('/photos/' . $p->bukti_lainnya) }}" width="30%"><br>
+                    <a href="{{ url('/photos/' . $bukti_lainnya) }}" download
+                        class="btn btn-sm btn-success mt-3 mb-3">Unduh Dokumen</a>
+                @elseif($p->bukti_lainnya == null)
+                @else
+                    <!-- Jika tipe file tidak dikenali -->
+                    <p class="text-muted mt-3 mb-3">Format file tidak didukung</p>
+                @endif
+                           
+
+                        </div>
+
+
+
                     </div>
-
                 </div>
             </div>
 
@@ -186,7 +429,7 @@
 @endsection
 
 
-<form action="{{ url('terima-pengajuan/' . $p->id) }}" method="POST">
+<form action="{{ url('terima-pengajuan/' . $p->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="modal fade text-left" id="default1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
@@ -208,6 +451,18 @@
                         <label for="exampleFormControlTextarea1" class="form-label">Catatan</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" name="catatan" rows="3"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="basicInput">Dokumen untuk Pemohon (Opsional)</label>
+                        <input type="file"
+                            class="form-control @error('dokumen_admin') is-invalid @enderror"
+                            id="basicInput" name="dokumen_admin" placeholder="...">
+
+                        @error('dokumen_admin')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" data-dismiss="modal">
@@ -224,7 +479,7 @@
     </div>
 </form>
 
-<form action="{{ url('tolak-pengajuan/' . $p->id) }}" method="POST">
+<form action="{{ url('tolak-pengajuan/' . $p->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="modal fade text-left" id="default2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
@@ -246,6 +501,18 @@
                         <label for="exampleFormControlTextarea1" class="form-label">Catatan</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" name="catatan" rows="3"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="basicInput">Dokumen untuk Pemohon (Opsional)</label>
+                        <input type="file"
+                            class="form-control @error('dokumen_admin') is-invalid @enderror"
+                            id="basicInput" name="dokumen_admin" placeholder="...">
+
+                        @error('dokumen_admin')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" data-dismiss="modal">
@@ -262,7 +529,7 @@
     </div>
 </form>
 
-<form action="{{ url('/atur-jadwal') }}" method="POST">
+<form action="{{ url('/atur-jadwal') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('POST')
     <div class="modal fade text-left" id="default3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
@@ -277,17 +544,28 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="pendampingan_id" value="{{ $p->id }}">
-                    <input type="hidden" name="petugas_id" value="{{ $users }}">
-
+                    {{-- <input type="hidden" name="petugas_id" value="{{ $users }}"> --}}
+                    <input type="hidden" name="users_id" value="{{$p->users_id}}">
+                    
+                    {{-- <div class="form-group">
+                        <label>Pilih Petugas</label>
+                        <select class="default3" name="petugas[]" multiple required>
+                            
+                            @foreach ($pp as $item)
+                                <option value="{{ $item->id }}">{{ $item->first_name }} {{ $item->last_name }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    
                     <div class="form-group">
                         <label for="basicInput">Judul Acara</label>
-                        <input type="text" class="form-control" id="basicInput" name="judul_acara"
+                        <input type="text" class="form-control" id="basicInput" name="judul_acara" value="{{$p->judul_permohonan}}"
                             placeholder="..." required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" name="deskripsi" rows="3" required></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="deskripsi" rows="3" required>{{$p->detail_kasus}}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -321,3 +599,20 @@
         </div>
     </div>
 </form>
+
+@section('css')
+
+@endsection
+
+@section('js')
+<script>
+       
+       $('#default3').on('shown.bs.modal', function () {
+    $('.default3').select2({
+        dropdownParent: $('#default3'),
+        width: '100%'
+    });
+});
+</script>  
+@endsection
+

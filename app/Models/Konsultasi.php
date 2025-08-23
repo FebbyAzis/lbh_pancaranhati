@@ -14,19 +14,36 @@ class Konsultasi extends Model
    protected $table = 'konsultasi';
 
     protected $fillable = [
+        'users_id',
         'judul',
         'kategori',
         'deskripsi',
         'dokumen',
-        'privasi',
         'metode_tanggapan',
-        'kontak',
-        'setuju_syarat',
-        'tfidf_response', // jika Anda tambahkan kolom ini
+        'kontak', 
+        'status',
+        'jawaban',
+        'notifikasi',// jika Anda tambahkan kolom ini
     ];
 
      public function users(): BelongsTo
     {
         return $this->belongsTo(Users::class);
     }
+
+    protected static function booted()
+{
+    static::created(function ($konsultasi) {
+        foreach (\App\Models\Users::all() as $user) {
+            $user->notify(new \App\Notifications\DataChangedNotification('Konsultasi', 'ditambahkan'));
+        }
+    });
+
+    static::updated(function ($konsultasi) {
+        foreach (\App\Models\Users::all() as $user) {
+            $user->notify(new \App\Notifications\DataChangedNotification('Konsultasi', 'diubah'));
+        }
+    });
+}
+
 }

@@ -61,8 +61,8 @@ $user = Auth::user();
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">Tentang Lembaga</a></li>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#tentang-lembaga">Tentang Lembaga</a></li>
           <li><a href="#stats">Layanan Kami</a></li>
           <li><a href="#services">Kontak dan Alamat</a></li>
           <li><a href="#team">FAQ</a></li>
@@ -115,7 +115,7 @@ $user = Auth::user();
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <section id="home" class="hero section dark-background">
 
       <img src="{{ asset ('assets/img/hero-bg.jpg') }}" alt="" data-aos="fade-in">
 
@@ -123,7 +123,7 @@ $user = Auth::user();
         <h2 data-aos="fade-up" data-aos-delay="100">PLAN. LAUNCH. GROW.</h2>
         <p data-aos="fade-up" data-aos-delay="200">We are team of talented designers making websites with Bootstrap</p>
         <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-          <a href="#about" class="btn-get-started">Get Started</a>
+          <a href="#tentang-lembaga" class="btn-get-started">Get Started</a>
           <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
         </div>
       </div>
@@ -131,7 +131,7 @@ $user = Auth::user();
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
-    <section id="about" class="about section">
+    <section id="tentang-lembaga" class="about section">
 
       <div class="container">
 

@@ -39,7 +39,7 @@
                                     <td>{{$item->judul_permohonan}}</td>
                                     <td>{{date("d/M/Y", strtotime($item->tanggal_permintaan));}}</td>
                                     <td>{{$item->kategori_masalah}}</td>
-                                    @if ($item->jadwal->id == null)
+                                    @if ($item->status == 1)
                                         <td><i class="fas fa-clock text-primary"></i>&nbsp; Menunggu Persetujuan</td>
                                     @elseif($item->status == 2)
                                         <td><i class="fas fa-check text-success"></i>&nbsp; Diterima</td>

@@ -25,24 +25,28 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                               <th>Judul Permohonan</th>
-                                <th>Tanggal Permintaan</th>
-                                <th>Kategori Masalah</th>
+                               <th>Judul Acara</th>
+                               <th>Pemohon</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                          
                                  <th>Status</th>
                                  <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($p as $no => $item)
+                            @foreach ($j as $no => $item)
                                 <tr>
                                     <td class="text-center">{{ $no + 1 }}</td>
-                                    <td>{{$item->judul_permohonan}}</td>
-                                    <td>{{date("d/M/Y", strtotime($item->tanggal_permintaan));}}</td>
-                                    <td>{{$item->kategori_masalah}}</td>
-                                    @if ($item->jadwal->id == null)
-                                        <td><i class="fas fa-xmark text-danger"></i>&nbsp; Belum ada jadwal</td>
+                                    <td>{{$item->judul_acara}}</td>
+                                    <td>{{$item->users->first_name}} {{$item->users->last_name}}</td>
+                                    <td>{{date("d/M/Y", strtotime($item->tanggal_mulai));}}</td>
+                                    <td>{{date("d/M/Y", strtotime($item->tanggal_selesai));}}</td>
+                                
+                                    @if ($item->status == 1)
+                                        <td><i class="fas fa-clock text-primary"></i>&nbsp; Dijadwalkan</td>
                                     @else
-                                        <td><i class="fas fa-check text-success"></i>&nbsp; Sudah ada jadwal</td>
+                                        <td><i class="fas fa-check text-success"></i>&nbsp; Jadwal Selesai</td>
                                     
                                     @endif
                                     <td>

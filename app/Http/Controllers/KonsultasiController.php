@@ -6,144 +6,94 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Konsultasi;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class KonsultasiController extends Controller
 {
     public function ajukan_konsultasi()
     {
-        return view('users.konsultasi_hukum.ajukan_konsultasi');
+        $user = Auth::user();
+        $users = $user->id;
+        return view('users.konsultasi_hukum.ajukan_konsultasi', compact('user', 'users'));
     }
 
-     public function submit(Request $request)
+    public function riwayat_layanan()
+    {
+        $user = Auth::user();
+        $users = $user->id;
+        $k = Konsultasi::where('users_id', $users)->orderBy('id', 'desc')->get();
+        return view('users.konsultasi_hukum.riwayat_layanan', compact('user', 'users', 'k'));
+    }
+
+    public function pengajuan_konsultasi(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string',
+            'users_id' => 'required',
+            'judul' => 'required|string|max:255',
             'kategori' => 'required|string',
             'deskripsi' => 'required|string',
-            'privasi' => 'required|in:Publik,Privat',
-            'metode_tanggapan' => 'required|in:Otomatis,Manual',
+            'dokumen' => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx,pdf|max:5120',
+            'metode_tanggapan' => 'required|string',
             'kontak' => 'nullable|string',
-            'dokumen' => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc',
-            'setuju_syarat' => 'accepted',
+            'status' => 'required',
+            'notifikasi' => 'required',
         ]);
 
-        $dokumenPath = null;
-        if ($request->hasFile('dokumen')) {
-            $dokumenPath = $request->file('dokumen')->store('dokumen');
-        }
+        $dokumen = null;
+    if ($request->hasFile('dokumen')) {
+        $file = $request->file('dokumen');
+        $dokumen = time() . '_' . $file->getClientOriginalName();
+        $file->move('photos', $dokumen);
+    }
 
-        $idBaru = Konsultasi::insertGetId([
+        Konsultasi::create([
+            'users_id' => $request->users_id,
             'judul' => $request->judul,
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
-            'dokumen' => $dokumenPath,
-            'privasi' => $request->privasi,
+            'dokumen' => $dokumen,
             'metode_tanggapan' => $request->metode_tanggapan,
             'kontak' => $request->kontak,
-            'setuju_syarat' => true,
-
+            'status' => $request->status,
+            'notifikasi' => $request->notifikasi,
         ]);
-        
-        if ($request->metode_tanggapan === 'otomatis') {
-            return $this->sarankanTFIDF($request->deskripsi, $idBaru);
-        }
-      dd($idBaru);
 
-        return redirect()->back()->with('Success', 'Konsultasi berhasil dikirim.');
+        return redirect()->back()->with('pengajuan_konsultasi', 'Konsultasi anda berhasil dikirim!');
     }
 
-    // TF-IDF PHP Implementasi Manual
-    public function sarankanTFIDF($teksBaru, $idBaru)
+    public function konsultasi_otomatis(Request $request)
     {
-        $dataLama = DB::table('konsultasi')
-            ->where('id', '!=', $idBaru)
-            ->pluck('deskripsi')
-            ->toArray();
-
-        $semuaTeks = array_merge($dataLama, [$teksBaru]);
-
-        // Preprocessing: tokenisasi
-        $token = function($text) {
-            $text = strtolower(strip_tags($text));
-            $text = preg_replace('/[^a-z0-9\s]/', '', $text);
-            return array_filter(explode(' ', $text));
-        };
-
-        $tokenDocs = array_map($token, $semuaTeks);
-
-        // Hitung TF
-        $tf = [];
-        foreach ($tokenDocs as $doc) {
-            $count = array_count_values($doc);
-            $total = count($doc);
-            $tf[] = array_map(fn($v) => $v / $total, $count);
-        }
-
-        // Hitung IDF
-        $df = [];
-        foreach ($tokenDocs as $doc) {
-            foreach (array_unique($doc) as $term) {
-                $df[$term] = ($df[$term] ?? 0) + 1;
-            }
-        }
-
-        $idf = [];
-        $N = count($tokenDocs);
-        foreach ($df as $term => $count) {
-            $idf[$term] = log($N / $count);
-        }
-
-        // Hitung TF-IDF
-        $tfidf = [];
-        foreach ($tf as $docTF) {
-            $vec = [];
-            foreach ($idf as $term => $idfVal) {
-                $vec[$term] = ($docTF[$term] ?? 0) * $idfVal;
-            }
-            $tfidf[] = $vec;
-        }
-
-        // Cosine similarity
-        $cosine = function($a, $b) {
-            $dot = 0;
-            $magA = 0;
-            $magB = 0;
-            $terms = array_unique(array_merge(array_keys($a), array_keys($b)));
-            foreach ($terms as $t) {
-                $va = $a[$t] ?? 0;
-                $vb = $b[$t] ?? 0;
-                $dot += $va * $vb;
-                $magA += $va ** 2;
-                $magB += $vb ** 2;
-            }
-            return ($magA && $magB) ? $dot / (sqrt($magA) * sqrt($magB)) : 0;
-        };
-
-        $baruVec = array_pop($tfidf);
-        $skor = [];
-        foreach ($tfidf as $i => $v) {
-            $skor[$i] = $cosine($baruVec, $v);
-        }
-
-        arsort($skor);
-        $topIndexes = array_slice(array_keys($skor), 0, 3); // Ambil 3 teratas
-
-        $hasil = [];
-        foreach ($topIndexes as $i) {
-            $hasil[] = $dataLama[$i];
-        }
-
-        // Simpan hasil saran ke database (opsional)
-        DB::table('konsultasi')->where('id', $idBaru)->update([
-            'tfidf_response' => implode("\n\n---\n\n", $hasil),
-            'updated_at' => now(),
+        $request->validate([
+            'users_id' => 'required',
+            'judul' => 'required|string|max:255',
+            'kategori' => 'required|string',
+            'deskripsi' => 'required|string',
+            'metode_tanggapan' => 'required|string',
+            'status' => 'required',
         ]);
 
-        // Kembalikan view dengan hasil saran
-        return view('konsultasi.hasil', [
-            'judul' => 'Saran Otomatis Berdasarkan Masalah Anda',
-            'deskripsi_user' => $teksBaru,
-            'saran_terkait' => $hasil
+        Konsultasi::create([
+            'users_id' => $request->users_id,
+            'judul' => $request->judul,
+            'kategori' => $request->kategori,
+            'deskripsi' => $request->deskripsi,
+            'metode_tanggapan' => $request->metode_tanggapan,
+            'status' => $request->status,
         ]);
+
+        return redirect()->back()->with('konsultasi_otomatis', 'Konsultasi anda berhasil dikirim!');
     }
+
+    // private function analisisTFIDF($deskripsi)
+    // {
+    //     // 👉 Dummy: logika TF-IDF nanti bisa kamu sambungkan ke dataset
+    //     // misalnya bandingkan dengan daftar masalah hukum yang sudah ada
+    //     if (str_contains(strtolower($deskripsi), 'warisan')) {
+    //         return 'Saran: Anda dapat mengajukan gugatan perdata terkait sengketa warisan.';
+    //     } elseif (str_contains(strtolower($deskripsi), 'pidana')) {
+    //         return 'Saran: Masalah pidana dapat dilaporkan ke kepolisian.';
+    //     }
+    //     return 'Saran umum: Silakan konsultasi lebih lanjut dengan petugas.';
+    // }
+
 }

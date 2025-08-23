@@ -36,4 +36,10 @@ class Jadwal extends Model
 {
     return $this->belongsTo(Pendampingan::class, 'pendampingan_id');
 }
+
+public function users(): BelongsTo
+{
+    return $this->belongsTo(Users::class, 'users_id');
+}
+
 }

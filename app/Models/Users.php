@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Jadwal;
+use App\Models\DetailJadwal;
 use App\Models\Konsultasi;
 use App\Models\Pendampingan;
+use Illuminate\Notifications\Notifiable;
 
 class Users extends Model
 {
     use HasFactory;
+    use Notifiable;
 
    protected $table = 'users';
 
@@ -23,7 +26,11 @@ class Users extends Model
         'email',
         'password',
         'role',
-        
+        'no_tlp',
+        'ttl',
+        'jenis_kelamin',
+        'alamat',
+        'foto_profil'
     ];
 
     public function jadwal(): HasMany
@@ -34,6 +41,11 @@ class Users extends Model
     public function konsultasi(): HasMany
     {
         return $this->hasMany(Konsultasi::class);
+    }
+
+    public function detail_jadwal(): HasMany
+    {
+        return $this->hasMany(DetailJadwal::class);
     }
 
 
