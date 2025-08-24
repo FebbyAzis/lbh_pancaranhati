@@ -96,4 +96,25 @@ class KonsultasiController extends Controller
     //     return 'Saran umum: Silakan konsultasi lebih lanjut dengan petugas.';
     // }
 
+    public function bacaNotifikasiUser($id)
+    {
+        // cari konsultasi
+        $k = Konsultasi::findOrFail($id);
+    
+        // update status notifikasi
+        $k->update([
+            'notifikasi' => 3
+        ]);
+    
+        // redirect ke halaman detail konsultasi masuk
+        return redirect()->route('konsultasiUser.detail', $id);
+    }
+
+    public function detail($id)
+    {
+        $k = Konsultasi::findOrFail($id);
+        return view('users.konsultasi_hukum.detail', compact('k'));
+    }
+        
+
 }

@@ -162,10 +162,7 @@
                                 <td>{{$item->lokasi}}</td>
                                 <td>{{$item->petugas_pendamping}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-primary block" data-toggle="modal"
-                                    data-target="#default1{{$item->id}}">
-                                    Detail
-                                </button>
+                                    <a href="{{route('detail.jadwalUser',$item->id)}}" class="btn btn-sm btn-outline-primary">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

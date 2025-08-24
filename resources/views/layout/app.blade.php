@@ -14,11 +14,11 @@
     $notifications = auth()->user()->notifications;
     $konsul = Konsultasi::where('notifikasi', '1')->get();
     $pend = Pendampingan::where('notifikasi', '1')->get();
-    $ku = Konsultasi::where('notifikasi', '2')->get();
-    $pu = Pendampingan::where('notifikasi', '2')->get();
+    $ku = Konsultasi::where('users_id', $users)->where('notifikasi', '2')->get();
+    $pu = Pendampingan::where('users_id', $users)->where('notifikasi', '2')->get();
     $ju = DetailJadwal::where('users_id', $users)->where('notifikasi', '1')->get();
-    $ktu = Konsultasi::where('notifikasi', '2')->count('id');
-    $ptu = Pendampingan::where('notifikasi', '2')->count('id');
+    $ktu = Konsultasi::where('users_id', $users)->where('notifikasi', '2')->count('id');
+    $ptu = Pendampingan::where('users_id', $users)->where('notifikasi', '2')->count('id');
     $kta = Konsultasi::where('notifikasi', '1')->count('id');
     $pta = Pendampingan::where('notifikasi', '1')->count('id');
     $jtu = DetailJadwal::where('users_id', $users)->where('notifikasi', '1')->count('id');
@@ -294,7 +294,7 @@
                                     @else
                                         <h6 class='py-2 px-4'>Konsultasi</h6>
                                         @foreach ($ku as $k)
-                                            <a href="{{ route('konsultasi.notifikasi', $k->id) }}"
+                                            <a href="{{ route('user.konsultasi', $k->id) }}"
                                                 class="dropdown-item">
 
 
@@ -308,7 +308,7 @@
                                         <h6 class='py-2 px-4'>Pendampingan</h6>
 
                                         @foreach ($pu as $p)
-                                            <a href="{{ route('pendampingan.notifikasi', $p->id) }}"
+                                            <a href="{{ route('pendampingan.user', $p->id) }}"
                                                 class="dropdown-item">
 
 
@@ -323,7 +323,7 @@
                                         <h6 class='py-2 px-4'>Jadwal</h6>
 
                                         @foreach ($ju as $p)
-                                            <a href="{{ route('pendampingan.notifikasi', $p->id) }}"
+                                            <a href="{{ route('jadwal.user', $p->id) }}"
                                                 class="dropdown-item">
 
 

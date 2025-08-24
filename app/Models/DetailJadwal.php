@@ -13,6 +13,19 @@ class DetailJadwal extends Model
 
     protected $table = 'detail_jadwal';
 
+    protected $fillable = [
+        'jadwal_id',
+        'users_id',
+        'nama_kegiatan',
+        'tanggal_waktu',
+        'lokasi',
+        'catatan_petugas',
+        'status_jadwal',
+        'petugas_pendamping',
+        'notifikasi',
+        
+    ];
+
     public function users(): BelongsTo
 {
     return $this->belongsTo(Users::class);

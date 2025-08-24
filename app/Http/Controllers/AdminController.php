@@ -256,7 +256,7 @@ class AdminController extends Controller
         $jenisTas->deskripsi = $request->deskripsi;
         $jenisTas->save();
         
-        return redirect()->back()->with('edit_dokumen', 'DOkumen berhasil diubah!');
+        return redirect()->back()->with('edit_dokumen', 'Dokumen berhasil diubah!');
     }
 
     public function hapus_dokumen(Request $request, $id)
@@ -292,7 +292,7 @@ class AdminController extends Controller
         ]);
     
         // redirect ke halaman detail konsultasi masuk
-        return redirect()->route('detail_konsultasi_masuk', $id);
+        return redirect()->route('detail.konsultasi', $id);
     }
 
     public function bacaNotifikasiPendampingan($id)

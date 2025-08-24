@@ -36,6 +36,13 @@ class PendampinganController extends Controller
         return view('users.pendampingan.detail_riwayat_layanan', compact('p'));
     }
 
+    public function detail_jadwal_kegiatan($id)
+    {
+        $j = DetailJadwal::findOrFail($id);
+   
+        return view('users.pendampingan.detail_jadwal_kegiatan', compact('j'));
+    }
+
      public function pengajuan_pendampingan(Request $request)
     {
         $request->validate([
@@ -149,4 +156,34 @@ class PendampinganController extends Controller
         
         return view('users.pendampingan.jadwal_detail', compact('user', 'users', 'j', 'pp', 'dj'));
     }
+
+    public function bacaNotifikasiPendampinganUser($id)
+    {
+        // cari konsultasi
+        $k = Pendampingan::findOrFail($id);
+    
+        // update status notifikasi
+        $k->update([
+            'notifikasi' => 3
+        ]);
+    
+        // redirect ke halaman detail konsultasi masuk
+        return redirect()->route('detail.pendampinganUser', $id);
+    }
+
+    public function bacaNotifikasiJadwalUser($id)
+    {
+        // cari konsultasi
+        $k = DetailJadwal::findOrFail($id);
+    
+        // update status notifikasi
+        $k->update([
+            'notifikasi' => 3
+        ]);
+    
+        // redirect ke halaman detail konsultasi masuk
+        return redirect()->route('detail.jadwalUser', $id);
+    }
+
+   
 }

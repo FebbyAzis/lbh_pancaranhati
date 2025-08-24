@@ -68,14 +68,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
     ->name('pendampingan.notifikasi');
     Route::get('/detail-pengajuan-layanan-hukum/{id}', [AdminController::class, 'detail_pengajuan_layanan_hukum'])
     ->name('detail.pendampingan');
-    Route::get('/notifikasi/konsultasi/user{id}', [AdminController::class, 'bacaNotifikasiUser'])
-    ->name('konsultasi.notifikasiUser');
-    Route::get('/detail_konsultasi_masuk/{id}', [AdminController::class, 'detail'])
-    ->name('detail.konsultasi');
-    Route::get('/notifikasi/pendampingan/{id}', [AdminController::class, 'bacaNotifikasiPendampingan'])
-    ->name('pendampingan.notifikasi');
-    Route::get('/detail-pengajuan-layanan-hukum/{id}', [AdminController::class, 'detail_pengajuan_layanan_hukum'])
-    ->name('detail.pendampingan');
+    
 });
 
 Route::middleware(['auth'])->group(function(){
@@ -85,13 +78,26 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/konsultasi-otomatis', [KonsultasiController::class, 'konsultasi_otomatis']);
     Route::get('/ajukan-pendampingan', [PendampinganController::class, 'ajukan_pendampingan']);
     Route::get('/riwayat-layanan-pendampingan', [PendampinganController::class, 'riwayat_layanan']);
-    Route::get('/detail-riwayat-layanan-pendampingan/{id}', [PendampinganController::class, 'detail_riwayat_layanan']);
+    Route::get('/detail-riwayat-layanan-pendampingan/{id}', [PendampinganController::class, 'detail_riwayat_layanan'])
+    ->name('detail.pendampinganUser');
     Route::post('/pengajuan-pendampingan', [PendampinganController::class, 'pengajuan_pendampingan']);
     Route::get('/jadwal-pendampingan', [PendampinganController::class, 'jadwal_pendampingan']);
     Route::get('/detail-jadwal-pendampingan/{id}', [PendampinganController::class, 'jadwal_detail']);
+    Route::get('/detail-jadwal-kegiatan/{id}', [PendampinganController::class, 'detail_jadwal_kegiatan'])
+    ->name('detail.jadwalUser');
     Route::get('/dokumen-hukum', [AdminController::class, 'dokumen_hukum']);
     Route::get('/profil', [ProfilController::class, 'profil']);
     Route::get('/riwayat-konsultasi', [KonsultasiController::class, 'riwayat_layanan']);
     Route::put('/edit-data/{id}', [ProfilController::class, 'edit_data']);
     Route::put('/edit-foto/{id}', [ProfilController::class, 'edit_foto']);
+    Route::get('/notifikasi/konsultasiuser/{id}', [KonsultasiController::class, 'bacaNotifikasiUser'])
+    ->name('user.konsultasi');
+    Route::get('/detail_konsultasiuser/{id}', [KonsultasiController::class, 'detail'])
+    ->name('konsultasiUser.detail');
+    Route::get('/notifikasi/pendampinganuser/{id}', [PendampinganController::class, 'bacaNotifikasiPendampinganUser'])
+    ->name('pendampingan.user');
+
+    Route::get('/notifikasi/jadwaluser/{id}', [PendampinganController::class, 'bacaNotifikasiJadwalUser'])
+    ->name('jadwal.user');
+    
 });

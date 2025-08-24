@@ -42,8 +42,8 @@
     </div>
 @endif
         <div class="page-title">
-            <h3>Detail Konsultasi Masuk</h3>
-            <p class="text-subtitle text-muted">Anda dapat melihat detail konsultasi masuk yang telah diajukan sebelumnya oleh pengguna pada halaman ini.</p>
+            <h3>Detail Konsultasi</h3>
+            <p class="text-subtitle text-muted">Anda dapat melihat detail konsultasi masuk yang telah diajukan sebelumnya pada halaman ini.</p>
         
             </div>
         <section class="section">
@@ -53,17 +53,7 @@
                         <div class="col-sm-6">
                             Detail Data Konsultasi
                         </div>
-                        <div class="col-sm-6 text-right">
-                            @if ($k->status == 1)
-                            <button type="button" class="btn btn-sm btn-outline-primary block" data-toggle="modal"
-                                    data-target="#default2{{$k->id}}">
-                                    Jawab Konsultasi
-                                </button>
-                           
-                                
-                            @else
-                            @endif
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="card-body">
