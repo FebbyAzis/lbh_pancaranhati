@@ -80,16 +80,17 @@
         <div class="text">
             <center>
             <h1 class>LBH Pancaran Hati</h1>
-          <h2>Laporan Konsultasi</h2>
+          <h2>Laporan Keseluruhan</h2>
             <h3>Periode {{ date('d/M/Y', strtotime($tglawal)) }} - {{ date('d/M/Y', strtotime($tglakhir)) }}</h3>
         </center>
         </div>
 
     </div>
+
     <div class="card">
-        {{-- <center>
-        <h1>Data Penimbangan</h1>
-    </center> --}}
+        <center>
+        <h1>Data Konsultasi</h1>
+    </center>
         <div class="col-sm-12">
             <table>
                 <thead>
@@ -221,6 +222,109 @@
                     @endif
                     
                         @endif
+                        </td>
+                       
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <center>
+        <h1>Data Pendampingan</h1>
+    </center>
+        <div class="col-sm-12">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Judul Permohonan</th>
+                        <th>Tanggal Permintaan</th>
+                        <th>Kategori</th>
+                        <th>Detail Kasus</th>
+                        <th>Lokasi Pendampingan</th>
+                        <th>Urgensi</th>
+                        <th>Kontak Aktif</th>
+                        <th>Status</th>
+                        <th>Cztatan</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($p as $no=>$item)
+                    <tr>
+                        <td>{{$no+1}}</td>
+                        <td>{{$item->judul_permohonan}}</td>
+                        <td>{{ date('d/M/Y', strtotime($item->tanggal_permintaan)) }}</td>
+                        <td>{{$item->kategori_masalah}}</td>
+                        <td>{{$item->detail_kasus}}</td>
+                        <td>{{$item->lokasi_pendampingan}}</td>
+                        <td>{{$item->urgensi}}</td>
+                        <td>{{$item->kontak_aktif}}</td>
+                       <td>
+                        @if ($item->status == 1)
+                        Menunggu Persetujuan
+                    @elseif($item->status == 2)
+                        Diterima
+                    @else
+                        Ditolak
+                    @endif
+                       </td>
+                        <td>{{$item->catatan}}</td>
+                        
+                        
+                       
+                       
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <center>
+        <h1>Data Jadwal Pendampingan</h1>
+    </center>
+        <div class="col-sm-12">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Nama Kegiatan</th>
+                        <th>Lokasi</th>
+                        <th>Petugas Pendamping</th>
+                        <th>Catatan Petugas</th>
+                        <th>Status</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($j as $no=>$item)
+                    <tr>
+                        <td>{{$no+1}}</td>
+                        
+                        <td>{{ date('d/M/Y', strtotime($item->tanggal_waktu)) }}</td>
+                        <td>{{ date('H:i', strtotime($item->tanggal_waktu)) }}</td>
+                        <td>{{$item->nama_kegiatan}}</td>
+                        <td>{{$item->lokasi}}</td>
+                        <td>{{$item->petugas_pendamping}}</td>
+                        
+                        
+                        <td>{{$item->catatan_petugas}}</td>
+                        
+                        
+                        <td>
+                            @if ($item->status_jadwal == 1)
+                                        Jadwal sedang berlangsung
+                                    @else
+                                       Jadwal Selesai
+                                    
+                                    @endif
                         </td>
                        
                     </tr>

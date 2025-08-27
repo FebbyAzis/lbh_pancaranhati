@@ -49,7 +49,7 @@
                                     data-target="#default2">
                                     Tolak Pengajuan
                                 </button>
-                            @elseif($p->status == 2)
+                            @elseif($j == null)
                             <button type="button" class="btn btn-sm btn-outline-success block" data-toggle="modal"
                                     data-target="#default3">
                                     Atur Jadwal

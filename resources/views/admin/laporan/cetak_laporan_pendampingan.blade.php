@@ -79,7 +79,7 @@
         <img src="{{asset('logo1.jpg')}}" alt="Logo Posyandu"> <!-- Ganti logo.png dengan path logo -->
         <div class="text">
             <center>
-            <h1 class>Sistem Informasi Posyandu Desa Karang Mekar</h1>
+            <h1 class>LBH Pancaran Hati</h1>
           <h2>Laporan Jadwal Pendampingan</h2>
             <h3>Periode {{ date('d/M/Y', strtotime($tglawal)) }} - {{ date('d/M/Y', strtotime($tglakhir)) }}</h3>
         </center>
@@ -103,7 +103,7 @@
                         <th>Urgensi</th>
                         <th>Kontak Aktif</th>
                         <th>Status</th>
-                        <th>Ctatan</th>
+                        <th>Catatan</th>
                      
                     </tr>
                 </thead>

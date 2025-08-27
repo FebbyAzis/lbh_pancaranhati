@@ -12,7 +12,12 @@ class DashboardController extends Controller
 {
     public function dashboard_admin()
     {
-        return view('admin.dashboard');
+        $k = Konsultasi::count('id');
+        $p = Pendampingan::count('id');
+        $j = DetailJadwal::count('id');
+        $up = Users::where('role', 'users')->count('id');
+        $ua = Users::where('role', 'admin')->count('id');
+        return view('admin.dashboard', compact('k', 'p', 'j', 'up', 'ua'));
     }
 
     public function dashboard_users()

@@ -79,7 +79,7 @@
         <img src="{{asset('logo1.jpg')}}" alt="Logo Posyandu"> <!-- Ganti logo.png dengan path logo -->
         <div class="text">
             <center>
-            <h1 class>Sistem Informasi Posyandu Desa Karang Mekar</h1>
+            <h1 class>LBH Pancaran Hati</h1>
           <h2>Laporan Jadwal Pendampingan</h2>
             <h3>Periode {{ date('d/M/Y', strtotime($tglawal)) }} - {{ date('d/M/Y', strtotime($tglakhir)) }}</h3>
         </center>
@@ -109,9 +109,11 @@
                     @foreach ($j as $no=>$item)
                     <tr>
                         <td>{{$no+1}}</td>
-                        <td>{{$item->nama_kegiatan}}</td>
+                       
                         <td>{{ date('d/M/Y', strtotime($item->tanggal_waktu)) }}</td>
+                        
                         <td>{{ date('H:i', strtotime($item->tanggal_waktu)) }}</td>
+                        <td>{{$item->nama_kegiatan}}</td>
                         <td>{{$item->lokasi}}</td>
                         <td>{{$item->petugas_pendamping}}</td>
                         

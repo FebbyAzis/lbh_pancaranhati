@@ -27,7 +27,9 @@ Route::get('/landing-page', function () {
     return view('landing_page');
 });
 
-
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
 Auth::routes();
 
 
@@ -46,6 +48,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::put('/edit-dokumen/{id}', [AdminController::class, 'edit_dokumen']);
     Route::put('/tolak-pengajuan/{id}', [AdminController::class, 'tolak_pengajuan']);
     Route::put('/edit-data/{id}', [ProfilController::class, 'edit_data']);
+    Route::put('/edit-user/{id}', [AdminController::class, 'edit_user']);
     Route::put('/edit-foto/{id}', [ProfilController::class, 'edit_foto']);
     Route::post('/atur-jadwal', [AdminController::class, 'atur_jadwal']);
     Route::put('/jawab-konsultasi/{id}', [AdminController::class, 'jawab_konsultasi']);
@@ -58,8 +61,9 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/cetak-laporan-konsultasi/{tglawal}/{tglakhir}', [LaporanController::class, 'laporan_konsultasi']);
     Route::get('/cetak-laporan-pendampingan/{tglawal}/{tglakhir}', [LaporanController::class, 'laporan_pendampingan']);
     Route::get('/cetak-laporan-jadwal-pendampingan/{tglawal}/{tglakhir}', [LaporanController::class, 'laporan_jadwal']);
+    Route::get('/cetak-laporan-keseluruhan/{tglawal}/{tglakhir}', [LaporanController::class, 'laporan_all']);
     Route::get('/konsultasi-masuk', [AdminController::class, 'konsultasi_masuk']);
-    
+    Route::get('/manajemen-user', [AdminController::class, 'manajemen_user']);
     Route::get('/notifikasi/konsultasi/{id}', [AdminController::class, 'bacaNotifikasi'])
     ->name('konsultasi.notifikasi');
     Route::get('/detail_konsultasi_masuk/{id}', [AdminController::class, 'detail'])

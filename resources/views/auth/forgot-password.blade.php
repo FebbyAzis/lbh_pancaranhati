@@ -24,7 +24,7 @@
                         <h3>Sign In</h3>
                         <p>Please sign in to continue to Voler.</p>
                     </div>
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group position-relative has-icon-left">
                             <label for="email">email</label>

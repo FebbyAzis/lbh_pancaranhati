@@ -15,10 +15,12 @@
         </div>
         <section class="section">
                     <div class="card">
-          
+          <div class="card-header mb-3">
+            Tombol Pencetakan Laporan
+          </div>
             <div class="card-body">
-                <div class="row mt-3 mb-3">
-                    <div class="col-sm-4">
+                <div class="row mt-3 mb-4">
+                    <div class="col-sm-6">
                         <center>
                             <button type="button" class="btn btn btn-outline-primary block" data-toggle="modal"
                             data-target="#default1">
@@ -27,7 +29,7 @@
                         </center>
                        
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <center>
                             <button type="button" class="btn btn btn-outline-primary block" data-toggle="modal"
                                     data-target="#default2">
@@ -35,11 +37,23 @@
                                 </button>
                         </center>
                     </div>
-                    <div class="col-sm-4">
+                  
+                </div>
+                <hr>
+                <div class="row mt-4 mb-4">
+                    <div class="col-sm-6">
                         <center>
                             <button type="button" class="btn btn btn-outline-primary block" data-toggle="modal"
                                     data-target="#default3">
                                     Laporan Jadwal Pendampingan
+                                </button>
+                        </center>
+                    </div>
+                    <div class="col-sm-6">
+                        <center>
+                            <button type="button" class="btn btn btn-outline-primary block" data-toggle="modal"
+                                    data-target="#default4">
+                                    Laporan Keseluruhan
                                 </button>
                         </center>
                     </div>
@@ -140,7 +154,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel1">Form Cetak Laporan Jadwal Pendampingan</h5>
+            <h5 class="modal-title" id="myModalLabel1">Form Cetak Laporan Pendampingan</h5>
             <button type="button" class="close rounded-pill" data-dismiss="modal" aria-label="Close">
                 <i data-feather="x"></i>
             </button>
@@ -164,6 +178,46 @@ aria-hidden="true">
             </button>
             <a href=""
                     onclick="this.href='/cetak-laporan-pendampingan/'+document.getElementById('tglawal2').value+'/'+document.getElementById('tglakhir2').value"
+                    target="_blank">
+            <button type="submit" class="btn btn-primary ml-1">
+                <i class="bx bx-check d-block d-sm-none"></i>
+                <span class="d-none d-sm-block">Cetak</span>
+            </button>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade text-left" id="default4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel1">Form Cetak Laporan Keseluruhan</h5>
+            <button type="button" class="close rounded-pill" data-dismiss="modal" aria-label="Close">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <div class="modal-body">                    
+            <div class="form-group">
+                <label for="basicInput">Tanggal Awal</label>
+                <input type="date" class="form-control" id="tglawal3" name="tglawal"
+                    placeholder="Masukan tanggal awal" required>
+            </div>
+            <div class="form-group">
+                <label for="basicInput">Tanggal Akhir</label>
+                <input type="date" class="form-control" id="tglakhir3" name="tglakhir"
+                    placeholder="Masukan tanggal akhir" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn" data-dismiss="modal">
+                <i class="bx bx-x d-block d-sm-none"></i>
+                <span class="d-none d-sm-block">Tutup</span>
+            </button>
+            <a href=""
+                    onclick="this.href='/cetak-laporan-keseluruhan/'+document.getElementById('tglawal3').value+'/'+document.getElementById('tglakhir3').value"
                     target="_blank">
             <button type="submit" class="btn btn-primary ml-1">
                 <i class="bx bx-check d-block d-sm-none"></i>

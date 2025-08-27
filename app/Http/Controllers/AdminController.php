@@ -27,7 +27,8 @@ class AdminController extends Controller
         $users = $user->id;
         $p = Pendampingan::with('jadwal.petugas')->find($id);
         $pp = Users::where('role', 'admin')->get();
-        return view('admin.pengajuan_layanan_hukum.detail', compact('p', 'user', 'users', 'pp'));
+        $j = Jadwal::where('users_id', $id)->get();
+        return view('admin.pengajuan_layanan_hukum.detail', compact('p', 'user', 'users', 'pp', 'j'));
     }
 
     public function jadwal($id)
@@ -340,4 +341,27 @@ if ($request->hasFile('dokumen_jawaban')) {
 
     return redirect()->back()->with('jawab_konsultasi', 'Konsultasi telah terjawab!');
 }
+
+    public function manajemen_user()
+    {
+        $mu = Users::where('role', 'users')->orderBy('id', 'desc')->get();
+        return view('admin.manajemen_user', compact('mu'));
+    }
+
+    public function edit_user(Request $request, $id)
+    {
+
+        Users::where('id', $id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'no_tlp' => $request->no_tlp,
+            'ttl' => $request->ttl,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+        ]);
+
+        return redirect()->back()->with('edit', 'Data anda berhasil diubah!');
+    }
 }

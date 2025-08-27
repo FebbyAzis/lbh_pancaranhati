@@ -43,4 +43,16 @@ class LaporanController extends Controller
 
         return view('admin.laporan.cetak_laporan_pendampingan', compact('p', 'tglawal', 'tglakhir'));
     }
+
+    public function laporan_all($tglawal, $tglakhir)
+    {
+        $p =  Pendampingan::whereDate('created_at', '>=', $tglawal)
+        ->whereDate('created_at', '<=', $tglakhir)->orderBy('id', 'desc')->get();
+        $j =  DetailJadwal::whereDate('created_at', '>=', $tglawal)
+        ->whereDate('created_at', '<=', $tglakhir)->orderBy('id', 'desc')->get();
+        $k =  Konsultasi::whereDate('created_at', '>=', $tglawal)
+        ->whereDate('created_at', '<=', $tglakhir)->orderBy('id', 'desc')->get();
+
+        return view('admin.laporan.cetak_laporan_all', compact('p', 'j', 'k', 'tglawal', 'tglakhir'));
+    }
 }

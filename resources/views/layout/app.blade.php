@@ -167,14 +167,6 @@
 
                             </li>
 
-                            <li class="sidebar-item  {{ request()->is('jawaban-otomatis*') ? 'active' : '' }}">
-                                <a href="{{ url('/jawaban-otomatis') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
-                                    <span>Jawaban Otomatis</span>
-                                </a>
-
-                            </li>
-
                             <li
                                 class="sidebar-item  {{ request()->is('pengajuan-layanan-hukum*') ? 'active' : '' }} {{ request()->is('detail-pengajuan-layanan-hukum*') ? 'active' : '' }}">
                                 <a href="{{ url('/pengajuan-layanan-hukum') }}" class='sidebar-link'>
@@ -188,7 +180,7 @@
                                 class="sidebar-item  {{ request()->is('kelola-jadwal-pendampingan*') ? 'active' : '' }}">
                                 <a href="{{ url('/kelola-jadwal-pendampingan') }}" class='sidebar-link'>
                                     <i data-feather="layout" width="20"></i>
-                                    <span>Jadwal & Kalender Pendampingan</span>
+                                    <span>Jadwal Pendampingan</span>
                                 </a>
 
                             </li>
@@ -217,13 +209,7 @@
 
                             </li>
 
-                            <li class="sidebar-item  {{ request()->is('pengaturan akun*') ? 'active' : '' }}">
-                                <a href="{{ url('/pengaturan-akun') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
-                                    <span>Pengaturan Akun</span>
-                                </a>
-
-                            </li>
+                           
 
                             <br>
                             <br>
