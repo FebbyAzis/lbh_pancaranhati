@@ -30,7 +30,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Voler Admin Dashboard</title>
+    <title>Dashboard - LBH Pancaran Hati</title>
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
@@ -43,7 +43,7 @@
     @yield('css')
     <link rel="stylesheet" href="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('photos/icon.jpg') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -51,7 +51,14 @@
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img src="{{ asset('images/logo.svg') }}" alt="" srcset="">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{{ asset('photos/icon.jpg') }}" alt="" srcset="">
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="text-secondary"><strong>LBH Pancaran Hati</strong></h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
@@ -81,7 +88,7 @@
                             <li
                                 class="sidebar-item  has-sub {{ request()->is('ajukan-konsultasi*') ? 'active' : '' }} {{ request()->is('riwayat-konsultasi*') ? 'active' : '' }} {{ request()->is('detail-riwayat-layanan-konsultasi*') ? 'active' : '' }} {{ request()->is('bookmark-konsultasi*') ? 'active' : '' }}">
                                 <a href="#" class='sidebar-link'>
-                                    <i data-feather="triangle" width="20"></i>
+                                    <i class="fa-solid fa-comments" width="20"></i>
                                     <span>Konsultasi Hukum</span>
                                 </a>
 
@@ -105,7 +112,7 @@
                             <li
                                 class="sidebar-item  has-sub {{ request()->is('ajukan-pendampingan*') ? 'active' : '' }} {{ request()->is('riwayat-layanan-pendampingan*') ? 'active' : '' }} {{ request()->is('detail-riwayat-layanan-pendampingan*') ? 'active' : '' }} {{ request()->is('jadwal-pendampingan*') ? 'active' : '' }}">
                                 <a href="#" class='sidebar-link'>
-                                    <i data-feather="triangle" width="20"></i>
+                                    <i class="fa-solid fa-handshake" width="20"></i>
                                     <span>Layanan Hukum</span>
                                 </a>
 
@@ -128,7 +135,7 @@
 
                             <li class="sidebar-item  {{ request()->is('dokumen-hukum*') ? 'active' : '' }}">
                                 <a href="{{ url('/dokumen-hukum') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
+                                    &nbsp;<i class="fa-solid fa-file" width="20"></i>
                                     <span>Dokumen Hukum</span>
                                 </a>
 
@@ -161,7 +168,7 @@
                             <li class='sidebar-title'>Main Menu</li>
                             <li class="sidebar-item  {{ request()->is('konsultasi-masuk*') ? 'active' : '' }}">
                                 <a href="{{ url('/konsultasi-masuk') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
+                                    <i class="fa-solid fa-comments" width="20"></i>
                                     <span>Konsultasi Masuk</span>
                                 </a>
 
@@ -170,7 +177,7 @@
                             <li
                                 class="sidebar-item  {{ request()->is('pengajuan-layanan-hukum*') ? 'active' : '' }} {{ request()->is('detail-pengajuan-layanan-hukum*') ? 'active' : '' }}">
                                 <a href="{{ url('/pengajuan-layanan-hukum') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
+                                    <i class="fa-solid fa-handshake" width="20"></i>
                                     <span>Pengajuan Layanan Hukum</span>
                                 </a>
 
@@ -179,7 +186,7 @@
                             <li
                                 class="sidebar-item  {{ request()->is('kelola-jadwal-pendampingan*') ? 'active' : '' }}">
                                 <a href="{{ url('/kelola-jadwal-pendampingan') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
+                                    &nbsp;<i class="fa-solid fa-calendar-days" width="20"></i>
                                     <span>Jadwal Pendampingan</span>
                                 </a>
 
@@ -187,15 +194,15 @@
 
                             <li class="sidebar-item  {{ request()->is('dokumen*') ? 'active' : '' }}">
                                 <a href="{{ url('/dokumen') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
-                                    <span>Dokumen & Surat Kuasa</span>
+                                    &nbsp;<i class="fa-solid fa-file" width="20"></i>
+                                    &nbsp;<span>Dokumen & Surat Kuasa</span>
                                 </a>
 
                             </li>
 
                             <li class="sidebar-item  {{ request()->is('manajemen-user*') ? 'active' : '' }}">
                                 <a href="{{ url('/manajemen-user') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
+                                    <i class="fa-solid fa-users" width="20"></i>
                                     <span>Manajemen User</span>
                                 </a>
 
@@ -203,7 +210,7 @@
 
                             <li class="sidebar-item  {{ request()->is('laporan*') ? 'active' : '' }}">
                                 <a href="{{ url('/laporan') }}" class='sidebar-link'>
-                                    <i data-feather="layout" width="20"></i>
+                                    &nbsp;<i class="fa-solid fa-print" width="20"></i>
                                     <span>Laporan</span>
                                 </a>
 
@@ -345,8 +352,7 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="{{ url('/profil') }}"><i data-feather="user"></i>
                                     Profil</a>
-                                <a class="dropdown-item" href="#"><i data-feather="mail"></i> Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
+                              
                                 <div class="dropdown-divider"></div>
                                 <button class="dropdown-item" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"><i data-feather="log-out"></i> Logout</button>
@@ -383,11 +389,10 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-left">
-                        <p>2020 &copy; Voler</p>
+                       
                     </div>
                     <div class="float-right">
-                        <p>Crafted with <span class='text-danger'><i data-feather="heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">Ahmad Saugi</a></p>
+                        <span>Copyright &copy; LBH Pancaran Hati</span>&nbsp;<span id="tahun1"></span>
                     </div>
                 </div>
             </footer>
@@ -409,6 +414,28 @@
     <script src="{{ asset('vendors/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('js/vendors.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+     <script type="text/javascript">
+        function updateClock() {
+            const now = new Date();
+document.getElementById('tahun1').textContent = now.getFullYear();
+            document.getElementById('hari').textContent = now.toLocaleDateString(undefined, {
+                weekday: 'long'
+            });
+            document.getElementById('tanggal').textContent = now.getDate();
+            document.getElementById('bulan').textContent = now.toLocaleDateString(undefined, {
+                month: 'long'
+            });
+            document.getElementById('tahun').textContent = now.getFullYear();
+            
+            document.getElementById('waktu').textContent = now.toLocaleTimeString();
+        }
+
+        // Update waktu setiap detik
+        setInterval(updateClock, 1000);
+
+        // Memastikan tampilan awal sudah terisi
+        updateClock();
+    </script>
     @yield('js')
 </body>
 

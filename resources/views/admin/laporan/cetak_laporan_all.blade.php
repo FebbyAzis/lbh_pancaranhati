@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIPDKM</title>
-    <link rel="shortcut icon" href="{{asset('logo1.jpg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('photos/icon.jpg')}}" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,7 +76,7 @@
 <body>
     <div class="kop-surat">
         
-        <img src="{{asset('logo1.jpg')}}" alt="Logo Posyandu"> <!-- Ganti logo.png dengan path logo -->
+        <img src="{{asset('photos/icon.jpg')}}" alt="Logo Posyandu"> <!-- Ganti logo.png dengan path logo -->
         <div class="text">
             <center>
             <h1 class>LBH Pancaran Hati</h1>

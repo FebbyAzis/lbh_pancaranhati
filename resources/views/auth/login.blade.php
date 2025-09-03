@@ -20,9 +20,9 @@
             <div class="card pt-4">
                 <div class="card-body">
                     <div class="text-center mb-5">
-                        <img src="{{ asset('images/favicon.svg') }}" height="48" class='mb-4'>
+                        <img src="{{ asset('photos/icon.jpg') }}" height="72" class='mb-4'>
                         <h3>Sign In</h3>
-                        <p>Please sign in to continue to Voler.</p>
+                        <p>Please sign in to continue.</p>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -71,21 +71,11 @@
                                 <a href="{{url('/register')}}">Don't have an account?</a>
                             </div>
                         </div>
-                        <div class="clearfix">
+                        <div class="clearfix mb-5">
                             <button class="btn btn-primary float-right" type="submit">Submit</button>
                         </div>
                     </form>
-                    <div class="divider">
-                        <div class="divider-text">OR</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button class="btn btn-block mb-2 btn-primary"><i data-feather="facebook"></i> Facebook</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button class="btn btn-block mb-2 btn-secondary"><i data-feather="github"></i> Github</button>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
